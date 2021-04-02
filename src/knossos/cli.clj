@@ -34,7 +34,8 @@
 (def models
   {"register"     model/register
    "cas-register" model/cas-register
-   "mutex"        model/mutex})
+   "mutex"        model/mutex
+   "multi-register" model/multi-register})
 
 (def algos
   {"competition" competition/analysis
@@ -59,13 +60,19 @@
   (try
     (let [{:keys [options arguments summary errors]} (cli/parse-opts args opts)
           analysis (:algorithm options)]
+      (prn options)
+      (prn arguments)
+      (prn (map eval (drop-last arguments)))
       (when-not (empty? errors)
         (doseq [e errors]
           (println e))
         (System/exit 1))
 
-      (let [model ((:model options))]
-        (doseq [file arguments]
+      (let [model 
+            (if (> 2 (count arguments))
+              ((:model options))
+              ((:model options) (map #(eval (read-string %)) (drop-last arguments))))]
+        (doseq [file (if (> 2 (count arguments)) arguments (rest arguments))]
           (print file)
           (flush)
           (let [history  (read-history file)

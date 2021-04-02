@@ -224,6 +224,7 @@
 
 (defn check
   [model history configs state]
+  (prn "check")
   (let [cache   (weak-cache-set/nbhs)
         res     (reduce (partial step history state cache)
                         configs
