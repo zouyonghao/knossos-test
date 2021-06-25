@@ -22,14 +22,10 @@
                    :perf :perf
                    :focus :focus}
   :jvm-opts ["-Xmx24g"
-             "-XX:+UseConcMarkSweepGC"
-             "-XX:+UseParNewGC"
              "-XX:+CMSParallelRemarkEnabled"
              "-XX:+AggressiveOpts"
-             "-XX:+UseFastAccessorMethods"
              "-XX:MaxInlineLevel=32"
              "-XX:MaxRecursiveInlineLevel=2"
-             "-XX:+UnlockCommercialFeatures"
              "-server"
 ;             "-XX:-OmitStackTraceInFastThrow"
 ;             "-XX:+FlightRecorder"
