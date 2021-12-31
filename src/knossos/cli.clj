@@ -34,6 +34,7 @@
 (def models
   {"register"     model/register
    "cas-register" model/cas-register
+   "cas-register0" (fu [] (model/cas-register 0))
    "mutex"        model/mutex
    "multi-register" model/multi-register})
 
